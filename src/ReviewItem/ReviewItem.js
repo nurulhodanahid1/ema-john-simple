@@ -2,7 +2,7 @@ import { getSuggestedQuery } from '@testing-library/react';
 import React from 'react';
 
 const ReviewItem = (props) => {
-    const {name, quantity} = props.product;
+    const {name, quantity, key, price} = props.product;
     // console.log(props)
     const reviewItemStyles = {
         borderBottom: "1px solid grey",
@@ -14,8 +14,9 @@ const ReviewItem = (props) => {
         <div style={reviewItemStyles}>
             <h4 className="product-name">Name: {name}</h4>
             <p>Quantity: {quantity}</p>
+            <p><small>${price}</small></p>
             <br />
-            <button className="main-button">Remove</button>
+            <button onClick={()=>props.handleProductRemove(key)} className="main-button">Remove</button>
         </div>
     );
 };
