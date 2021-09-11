@@ -10,7 +10,7 @@ const Cart = (props) => {
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
         const prd = cart[i];
-        total = total + prd.price * Number(prd.quantity);
+        total = total + prd.price * Number(prd.quantity || 1);
     }
     let shipping = 0;
     if(total > 35){

@@ -6,7 +6,16 @@ import Product from '../Product/Product';
 const ProductDetail = () => {
     document.title = "Product Details";
     const {productKey} = useParams();
-    const product = fakeData.find(pd => pd.key === productKey);
+
+    const[product, setProduct] = useState({});
+    useEffect(() =>{
+        fetch(`http://localhost:5000/product/${productKey}`)
+        .then(res => res.json())
+        .then(data => setProduct(data))
+    }, [productKey])
+
+    // const product = fakeData.find(pd => pd.key === productKey);
+
     // const [loading, setLoading] = useState(true)
     // const [product, setProduct] = useState({});
     // useEffect(()=> {
