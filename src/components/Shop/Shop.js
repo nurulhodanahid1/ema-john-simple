@@ -13,12 +13,13 @@ const Shop = () => {
     // const [products, setProducts] = useState(first10);
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() =>{
-        fetch("https://evening-forest-20156.herokuapp.com/products")
+        fetch("http://localhost:5000/products?search="+search)
         .then(res => res.json())
         .then(data => setProducts(data))
-    }, [])
+    }, [search]);
 
     useEffect(() =>{
         const savedCart = getDatabaseCart();
@@ -48,6 +49,10 @@ const Shop = () => {
 
     // const [cart, setCart] = useState([]);
 
+    const handleSearch = event => {
+        setSearch(event.target.value);
+    }
+
     const handleAddProduct = (singleProduct) => {
         const toBeAddedKey = singleProduct.key;
         const sameProduct = cart.find(pd => pd.key === toBeAddedKey);
@@ -73,6 +78,15 @@ const Shop = () => {
     return (
         <div className="shop-container">
             <div className="product-container">
+            {/* <form className="col-md-6 m-auto py-5">
+                <div className="input-group mb-3">
+                    <input type="text" name="" onBlur={handleSearch} id="" className="form-control" placeholder="Search your products" />
+                    <div className="input-group-append">
+                        <button type="button" className="btn btn-success">Search</button>
+                    </div>
+                </div>
+            </form> */}
+            <input type="text" onBlur={handleSearch} />
                 {
                     products.length === 0 && <p>Loading...</p>
                 }
